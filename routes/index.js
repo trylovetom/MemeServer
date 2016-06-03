@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 
 // webhook
 router.get('/webhook', function(req, res) {
-	console.log(req.query['hub.verify_token']);
 	if (req.query['hub.verify_token'] === 'meme') {
 		return res.send(req.query['hub.challenge']);
 	} else {
