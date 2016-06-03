@@ -1,4 +1,5 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
 
 /* GET home page. */
@@ -9,29 +10,28 @@ router.get('/', function(req, res, next) {
 });
 
 // webhook
-router.get('/webhook/', function(req, res) {
-	if (req.query['hub.verify_token'] === '<validation_token>') {
-		res.send(req.query['hub.challenge']);
+router.get('/webhook', function(req, res) {
+	if (req.query['hub.verify_token'] === 'meme') {
+		return res.send(req.query['hub.challenge']);
 	} else {
-		res.send('Error, wrong validation token');
+		return res.send('Error, wrong validation token');
 	}
 })
 
-router.post('/webhook/', function(req, res) {
-	console.log(req.body);
-	const messaging_events = req.body.entry[0].messaging;
+router.post('/webhook', function(req, res) {
+	messaging_events = req.body.entry[0].messaging;
 	for (i = 0; i < messaging_events.length; i++) {
-		const event = req.body.entry[0].messaging[i];
-		const sender = event.sender.id;
+		event = req.body.entry[0].messaging[i];
+		sender = event.sender.id;
 		if (event.message && event.message.text) {
-			const text = event.message.text;
+			text = event.message.text;
 			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200));
 		}
 	}
 	res.sendStatus(200);
 });
 
-var token = "<page_access_token>";
+var token = "EAAXC3RwTmukBAH6alOBN69sTKJbMPWAKZAZCKJlSsTfTlQz18UvlZCEgDRNeiZAUH5dJQilElzQnxXUuiBJPnjDJ34absN2Q8e0N2zo7WNeTmVw9zjKA5BuhOdnDbyl5JJHxXrdgvyBOO7vhZCPdjQ1F1wIPUwc4sQEnTeVBaCgZDZD";
 
 function sendTextMessage(sender, text) {
 	const messageData = {
