@@ -20,6 +20,7 @@ app.set('port', port);
  * Create HTTPS server.
  */
 var options = {
+  ca: fs.readFileSync('./ca.pem'),
   key: fs.readFileSync('./privatekey.pem'),
   cert: fs.readFileSync('./certificate.pem')
 };
