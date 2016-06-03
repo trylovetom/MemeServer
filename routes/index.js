@@ -18,7 +18,8 @@ router.get('/webhook/', function(req, res) {
 })
 
 router.post('/webhook/', function(req, res) {
-	messaging_events = req.body.entry[0].messaging;
+	console.log(req.body);
+	const messaging_events = req.body.entry[0].messaging;
 	for (i = 0; i < messaging_events.length; i++) {
 		const event = req.body.entry[0].messaging[i];
 		const sender = event.sender.id;
@@ -33,7 +34,7 @@ router.post('/webhook/', function(req, res) {
 var token = "<page_access_token>";
 
 function sendTextMessage(sender, text) {
-	messageData = {
+	const messageData = {
 		text: text
 	}
 	request({
