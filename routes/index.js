@@ -25,7 +25,7 @@ router.post('/webhook', function(req, res) {
 		sender = event.sender.id;
 		if (event.message && event.message.text) {
 			text = event.message.text;
-			sendTextMessage(sender, "我是Meme，你剛剛說了：" + text.substring(0, 200) + "。");
+			sendTextMessage(sender, "我是Meme，你剛剛說了：" + text.substring(0, 200));
 		}
 	}
 	res.sendStatus(200);
