@@ -3,11 +3,11 @@ var request = require('request');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-	res.render('index', {
-		title: 'Express'
-	});
-});
+// router.get('/', function(req, res, next) {
+// 	res.render('index', {
+// 		title: 'Express'
+// 	});
+// });
 
 // webhook
 router.get('/webhook', function(req, res) {
@@ -25,7 +25,8 @@ router.post('/webhook', function(req, res) {
 		sender = event.sender.id;
 		if (event.message && event.message.text) {
 			text = event.message.text;
-			sendTextMessage(sender, "我是Meme，你剛剛說了：" + text.substring(0, 200));
+			// sendTextMessage(sender, "我是Meme，你剛剛說了：" + text.substring(0, 200));
+			sendTextMessage(sender, "我去洗澡囉，晚安");
 		}
 	}
 	res.sendStatus(200);
